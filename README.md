@@ -33,19 +33,32 @@ With Meteovision, you don't read the weather: you watch it, you experience it.
 Bill of material / Elenco materiali
 
 🎛️ SSD1306 128x32 AMZ: https://amzn.to/3GfbspG
+
 🎛️ SSD1306 128x32 ALI: https://s.click.aliexpress.com/e/_oovQgEA
+
 🎛️ Anello 24LED (EXT:85mm/INT:70mm) AMZ: https://amzn.to/44hIzRx
+
 🎛️ Vetro per Redmi Watch 5 Active AMZ: https://amzn.to/3HZrPqO
+
 🎛️ Vetro per Redmi Watch 5 Active ALI: https://s.click.aliexpress.com/e/_oD0nSBC
+
 🎛️ ESP32C3 AMZ: https://amzn.to/4kt5G2W
+
 🎛️ ESP32C3 ALI: https://s.click.aliexpress.com/e/_DDST7Bj
+
 🎛️ Pulsante 6x6x7 DIP: https://s.click.aliexpress.com/e/_opuTCbP
+
 🎛️ Resistenza 220R ALI: https://s.click.aliexpress.com/e/_okkfxGp
 
 🎛️ Campana di vetro 9x12cm: https://s.click.aliexpress.com/e/_op1zvwS
+
 Il link proposto è esattamente quella che ho utilizzato, siccome serve solo la parte in vetro è ragionevole pensare che altri tipi proposti da altri venditori siano utilizzabili.
 Ho identificato altri 4 venditori che propongono la misura 9x12cm, ma non li ho provati effettivamente e non posso garantire che siano adatti, me se le misure sono rispettate dovrebbe andare benone. In generale se trovate una 'campana di vetro' o 'Glass dome' da 9x12cm dovrebbe andare bene. 
 Link alternativi:
+
 🎛️ https://s.click.aliexpress.com/e/_oEAQ9RF
+
 🎛️ https://s.click.aliexpress.com/e/_o2bXqxB
+
 🎛️ https://s.click.aliexpress.com/e/_oCWLLnF
+
