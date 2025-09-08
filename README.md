@@ -56,6 +56,8 @@ Il link proposto è esattamente quella che ho utilizzato, siccome serve solo la 
 Ho identificato altri 4 venditori che propongono la misura 9x12cm, ma non li ho provati effettivamente e non posso garantire che siano adatti, me se le misure sono rispettate dovrebbe andare benone. In generale se trovate una 'campana di vetro' o 'Glass dome' da 9x12cm dovrebbe andare bene. 
 Link alternativi:
 
+The link provided is exactly the one I used. Since only the glass part is needed, it is reasonable to assume that other types offered by other sellers are also suitable. I have identified four other sellers offering the 9x12cm size, but I have not actually tried them and cannot guarantee that they are suitable. However, if the measurements are correct, they should be fine. In general, if you find a 9x12cm ‘glass dome’ or ‘glass bell jar’, it should be fine. Alternative links:
+
 🎛️ https://s.click.aliexpress.com/e/_oEAQ9RF
 
 🎛️ https://s.click.aliexpress.com/e/_o2bXqxB
