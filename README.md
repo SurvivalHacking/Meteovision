@@ -27,7 +27,7 @@ With Meteovision, you don't read the weather: you watch it, you experience it.
 
 ![IMG_0625_(00-00-06-19)](https://github.com/user-attachments/assets/d3cc39a5-8f46-47bf-829d-019770c0a9b4)
 
-![Screenshot 2025-09-04 alle 14 47 03](https://github.com/user-attachments/assets/4172a581-de25-43ad-9f5f-65e12c766d1f)
+![Screenshot 2025-09-08 alle 11 39 13](https://github.com/user-attachments/assets/2f17305d-fa38-469d-8bbf-8e048fb46c6c)
 
 
 Bill of material / Elenco materiali
