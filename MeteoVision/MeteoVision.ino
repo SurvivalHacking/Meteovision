@@ -1294,7 +1294,7 @@ void handleRoot() {
         "Cuneo", "Enna", "Fermo", "Ferrara", "Firenze", "Foggia", "Forlì-Cesena", "Frosinone", "Genova", "Gorizia", "Grosseto", "Imperia", "Isernia", "La Spezia", "Latina", "Lecce",
         "Lecco", "Livorno", "Lodi", "Lucca", "Macerata", "Mantova", "Massa-Carrara", "Matera", "Messina", "Milano", "Modena", "Monza", "Napoli", "Novara", "Nuoro",
         "Oristano", "Padova", "Palermo", "Parma", "Pavia", "Perugia", "Pesaro e Urbino", "Pescara", "Piacenza", "Pisa", "Pistoia", "Pordenone", "Potenza", "Prato", "Ragusa",
-        "Ravenna", "Reggio Calabria", "Reggio Emilia", "Rieti", "Rimini", "Roma", "Rovigo", "Salerno", "Sassari", "Savona", "Siena", "Siracusa", "Sondrio", "Taranto", "Teramo",
+        "Ravenna", "Reggio Calabria", "Reggio Emilia", "Rieti", "Rimini", "Roma", "Rovigo", "Sabaudia", "Salerno", "Sassari", "Savona", "Siena", "Siracusa", "Sondrio", "Taranto", "Taverna", "Teramo",
         "Terni", "Torino", "Trapani", "Trento", "Treviso", "Trieste", "Udine", "Varese", "Venezia", "Verbania", "Vercelli", "Verona", "Vibo Valentia", "Vicenza", "Viterbo"
     };
     for (int i = 0; i < sizeof(cities)/sizeof(cities[0]); i++) {
@@ -1357,10 +1357,10 @@ void handleSave() {
     String cityFromManualInput = server.arg("city_manual");
     String cityToSave = "";
 
-    if (!cityFromSelector.isEmpty()) {
-        cityToSave = cityFromSelector;
-    } else {
+    if (!cityFromManualInput.isEmpty()) {
         cityToSave = cityFromManualInput;
+    } else {
+        cityToSave = cityFromSelector;
     }
 
     if (String(savedCity) != cityToSave) {
