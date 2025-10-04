@@ -1,4 +1,8 @@
-// Meteovision 1.0 by Davide Gatti - 2025 - www.survivalhacking.it
+// V1.0 - 06/2025 - Meteovision by Davide Gatti - 2025 - www.survivalhacking.it
+// V1.1 - 09/2025 - L'inserimento della città manualemnte via WEB non funzionava
+// V1.2 - 09/2025 - Aggiunta la possibilità di vedere la previsione del giorno corrente / del giorno dopo e del giorno dopo ancora, mediante menù di configurazione WEB
+// V1.3 - 10/2025 - Non erano gestite diverse tipologie di meteo tipo Neve da 600 a 699 e nebbia fumo e altre condizioni particolari da 700 a 799 
+// V1.4 - 10/2025 - Aggiunta scritta in mezzo alle due icone per evidenziare il giorno relativo alle previsioni 
 //
 // Da un'idea di Roberto Proli e l'aiuto di MatixVision
 //
@@ -137,6 +141,7 @@ int savedNeopixelBrightness = 10;                 // Luminosità LED predefinita
 int savedMode = 0;                                // Modalità predefinita
 bool DisplayOneTime = false;                      // Flag per evitare aggiornamenti duplicati del display
 int Currentmode = 0;                              // Modalità corrente (auto, colori fissi ecc.)
+int forecastDay = 0;                              // 0 = oggi, 1 = domani, 2 = dopodomani
 #define MAX_MODE 10                               // Numero massimo di modalità definite
 
 // Definizione delle modalità disponibili
@@ -504,6 +509,7 @@ void saveConfig() {
   preferences.putString("city", savedCity);                // Salva il nome della città
   preferences.putInt("brightness", savedNeopixelBrightness);  // Salva la luminosità dei NeoPixel
   preferences.putInt("Currentmode", Currentmode);          // Salva la modalità corrente (es. AUTO, ROSSO, ecc.)
+  preferences.putInt("forecastDay", forecastDay);   // Salva il giorno scelto
   Serial.println("Configurazione salvata.");               // Messaggio di conferma sul monitor seriale
 }
 
@@ -518,6 +524,8 @@ void loadConfig() {
 
   // Recupera la modalità corrente; se non esistente, imposta AUTO (0)
   Currentmode = preferences.getInt("Currentmode", 0);
+  
+  forecastDay = preferences.getInt("forecastDay", 0);   // Default = oggi
 
   Serial.println("Configurazione caricata.");
 }
@@ -547,7 +555,7 @@ void configModeCallback(WiFiManager *myWiFiManager) {
 // --- FUNZIONI METEO ---
 // Funzione che contatta OpenWeatherMap per ottenere i dati meteo attuali
 void fetchWeather() {
-  Serial.println("Fetching weather from OpenWeatherMap...");
+  Serial.println("=== Fetching weather (OpenWeather Forecast API) ===");
   HTTPClient http;
 
   // Recupera la chiave API attualmente salvata
@@ -560,22 +568,24 @@ void fetchWeather() {
   }
 
   // Costruisce l’URL per interrogare OpenWeatherMap con unità metriche e lingua italiana
-  String weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + apiCityQuery + "," + String(savedCountryCode) + "&units=metric&appid=" + currentApiKey + "&lang=it";
+  String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" 
+                      + apiCityQuery + "," + String(savedCountryCode) 
+                      + "&units=metric&appid=" + currentApiKey + "&lang=it";
 
-  Serial.print("OpenWeatherMap URL: ");
+  Serial.print("Forecast URL: ");
   Serial.println(weatherUrl);
 
   http.begin(weatherUrl);              // Inizializza la richiesta HTTP
-  int httpCode = http.GET();          // Effettua la chiamata GET
+  int httpCode = http.GET();           // Effettua la chiamata GET
 
   // Controlla se la risposta è valida (codice 200)
   if (httpCode == HTTP_CODE_OK) {
     String payload = http.getString();  // Ottiene il contenuto della risposta JSON
-    Serial.println("OpenWeatherMap Response:");
+    Serial.println("Forecast API Response:");
     Serial.println(payload);
 
     // Parser JSON: prepara buffer di dimensione adeguata
-    DynamicJsonDocument doc(2048);
+    DynamicJsonDocument doc(30 * 1024);
     DeserializationError error = deserializeJson(doc, payload);
 
     // Gestisce eventuali errori di parsing JSON
@@ -586,15 +596,20 @@ void fetchWeather() {
       return;
     }
 
-    // Estrae informazioni rilevanti dal JSON
-    JsonObject weather_0 = doc["weather"][0];
-    weatherDescription = weather_0["description"].as<String>();  // Es. "pioggia leggera"
-    weatherConditionCode = weather_0["id"].as<int>();            // Codice meteo numerico OpenWeather
+    // Calcola indice del blocco in base al giorno selezionato
+    int index = forecastDay * 8;  // 0=oggi, 1=domani (8 blocchi=24h), 2=dopodomani (16 blocchi=48h)
+    if (index >= doc["list"].size()) index = 0;  // fallback di sicurezza
 
-    // Dati aggiuntivi
-    temperatureCelsius = doc["main"]["temp"].as<float>();         // Temperatura attuale
-    sunriseTime = doc["sys"]["sunrise"].as<long>();              // Timestamp UNIX alba
-    sunsetTime = doc["sys"]["sunset"].as<long>();                // Timestamp UNIX tramonto
+    JsonObject forecast = doc["list"][index];
+
+    // Estrae informazioni rilevanti dal JSON
+    weatherDescription   = forecast["weather"][0]["description"].as<String>();  // Es. "pioggia leggera"
+    weatherConditionCode = forecast["weather"][0]["id"].as<int>();              // Codice meteo numerico
+    temperatureCelsius   = forecast["main"]["temp"].as<float>();                // Temperatura prevista
+
+    // Alba e tramonto disponibili solo nella sezione "city"
+    sunriseTime = doc["city"]["sunrise"].as<long>();
+    sunsetTime  = doc["city"]["sunset"].as<long>();
 
     // Se sei in modalità automatica, aggiorna LED e attiva animazione cerchio
     if (Currentmode == MODO_AUTO) {
@@ -602,19 +617,25 @@ void fetchWeather() {
       animateNeopixelCircular();    // Avvia animazione cerchio all’accensione
     }
 
-    // Debug seriale
+    // Debug seriale dettagliato
+    Serial.println("--- Risultato Previsione ---");
+    Serial.print("ForecastDay (0=oggi,1=domani,2=dopodomani): ");
+    Serial.println(forecastDay);
+    Serial.print("Indice lista usato: ");
+    Serial.println(index);
     Serial.print("Descrizione Meteo: ");
     Serial.println(weatherDescription);
     Serial.print("Codice Condizione (ID): ");
     Serial.println(weatherConditionCode);
     Serial.print("Temperatura: ");
-    Serial.println(temperatureCelsius);
-    Serial.print("Alba: ");
+    Serial.print(temperatureCelsius);
+    Serial.println(" °C");
+    Serial.print("Alba (da city): ");
     Serial.println(sunriseTime);
-    Serial.print("Tramonto: ");
+    Serial.print("Tramonto (da city): ");
     Serial.println(sunsetTime);
-    Serial.print("Mode: ");
-    Serial.println(Currentmode);
+    Serial.println("-----------------------------");
+
   } else {
     // In caso di errore HTTP
     Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -700,6 +721,19 @@ void displayWeatherAnimation() {
   int currentAnimWidth = 0;
   int currentAnimHeight = 0;
 
+  display.setTextSize(1);                          // Font normale
+  
+  if (forecastDay ==0 ) {
+    display.setCursor(54, 14);
+    display.print("OGGI");
+  } else if (forecastDay ==1 ) {  
+    display.setCursor(48, 14);
+    display.print("DOMANI");
+  } else if (forecastDay ==2 ) {  
+    display.setCursor(35, 14);
+    display.print("DOPODOMANI");
+  }
+
   // --- SCELTA ANIMAZIONE METEO ---
   if (weatherConditionCode >= 200 && weatherConditionCode < 300) {
     // Temporale
@@ -712,7 +746,8 @@ void displayWeatherAnimation() {
 //    dualAnimation = false;
 
   } else if (weatherConditionCode >= 300 && weatherConditionCode < 400 ||
-             weatherConditionCode >= 500 && weatherConditionCode < 600) {
+             weatherConditionCode >= 500 && weatherConditionCode < 600 ||
+             weatherConditionCode >= 600 && weatherConditionCode < 700) {  //Neve
     // Pioggia o pioggerella
     currentAnimation = rain_animation;
     currentAnimFrames = RAIN_ANIM_FRAMES;
@@ -735,7 +770,8 @@ void displayWeatherAnimation() {
     }
     dualAnimation = false;
 
-  } else if (weatherConditionCode >= 801 && weatherConditionCode <= 802) {
+  } else if (weatherConditionCode >= 801 && weatherConditionCode <= 804 ||
+             weatherConditionCode >= 700 && weatherConditionCode < 799) {  //Nebbia
     // Poche nuvole o nuvole sparse → sole/luna + nuvole insieme
     if (isDaytime) {
       currentAnimation = sun_animation;
@@ -750,14 +786,6 @@ void displayWeatherAnimation() {
     }
     currentAnimation1 = cloud_animation;
     dualAnimation = true;
-
-  } else if (weatherConditionCode >= 803 && weatherConditionCode <= 804) {
-    // Nuvole irregolari o cielo coperto
-    currentAnimation = cloud_animation;
-    currentAnimFrames = CLOUD_ANIM_FRAMES;
-    currentAnimWidth = CLOUD_ANIM_WIDTH;
-    currentAnimHeight = CLOUD_ANIM_HEIGHT;
-    dualAnimation = false;
 
   } else {
     // Nessuna animazione nota → mostra testo
@@ -778,15 +806,16 @@ void displayWeatherAnimation() {
     // --- DISEGNO DELLE IMMAGINI ---
     if (!dualAnimation) {
       // Mostra una singola animazione centrata
-      int x_pos = (OLED_WIDTH - currentAnimWidth) / 2;
+      // int x_pos = (OLED_WIDTH - currentAnimWidth) / 2;
+      int x_pos = 128 - 32 - 00;
       int y_pos = (OLED_HEIGHT - currentAnimHeight) / 2;
       display.drawBitmap(x_pos, y_pos, currentAnimation[currentFrame], currentAnimWidth, currentAnimHeight, SSD1306_WHITE);
 
     } else {
       // Mostra due bitmap animate: una a sinistra e una a destra
-      int x_pos1 = 20;
+      int x_pos1 = 00;
       int y_pos1 = (OLED_HEIGHT - currentAnimHeight) / 2;
-      int x_pos2 = 128 - 32 - 20;
+      int x_pos2 = 128 - 32 - 00;
       int y_pos2 = (OLED_HEIGHT - currentAnimHeight) / 2;
 
       display.drawBitmap(x_pos1, y_pos1, currentAnimation[currentFrame], currentAnimWidth, currentAnimHeight, SSD1306_WHITE);
@@ -838,14 +867,15 @@ void updateWeatherLEDs() {
 
     tempNeopixelBaseColor = pixels.Color(197, 0, 255);
 
-  } else if (weatherConditionCode >= 300 && weatherConditionCode < 400) {
-    // Pioggerella
+  } else if (weatherConditionCode >= 300 && weatherConditionCode < 400 ||
+             weatherConditionCode >= 700 && weatherConditionCode < 799) {
+    // Pioggerella + nebbia + fumo
     digitalWrite(PIN_LED_PIOGGIA, HIGH);
     digitalWrite(PIN_LED_NUVOLE, HIGH);
     tempNeopixelBaseColor = pixels.Color(0, 0, 255);  // Blu classico
 
-  } else if (weatherConditionCode >= 500 && weatherConditionCode < 600) {
-    // Pioggia
+  } else if (weatherConditionCode >= 500 && weatherConditionCode < 700) {
+    // Pioggia o neve
     digitalWrite(PIN_LED_PIOGGIA, HIGH);
     digitalWrite(PIN_LED_NUVOLE, HIGH);
     tempNeopixelBaseColor = pixels.Color(0, 180, 255);  // Blu ciano brillante
@@ -860,8 +890,8 @@ void updateWeatherLEDs() {
       tempNeopixelBaseColor = pixels.Color(128, 128, 128);  // Bianco/grigio tenue
     }
 
-  } else if (weatherConditionCode >= 801 && weatherConditionCode <= 802) {
-    // Sole o luna con nuvole sparse
+  } else if (weatherConditionCode >= 801 && weatherConditionCode <= 804) {
+    // Sole o luna con nuvole sparse, celo coperto, nuovole 
     if (isDaytime) {
       digitalWrite(PIN_LED_SOLE, HIGH);
       digitalWrite(PIN_LED_NUVOLE, HIGH);
@@ -871,12 +901,6 @@ void updateWeatherLEDs() {
       digitalWrite(PIN_LED_NUVOLE, HIGH);
       tempNeopixelBaseColor = pixels.Color(128, 128, 128);  // Notte: tenue
     }
-
-  } else if (weatherConditionCode >= 803 && weatherConditionCode <= 804) {
-    // Cielo molto nuvoloso o coperto
-    digitalWrite(PIN_LED_NUVOLE, HIGH);
-    tempNeopixelBaseColor = pixels.Color(255, 255, 255);  // Bianco
-
   }
 
   // Aggiorna il colore base da usare per effetto respiro o accensione LED
@@ -1302,8 +1326,17 @@ void handleRoot() {
     }
     html += "</select>";
     html += "<label for=\"city_manual\">Inserisci Citta' manualmente (se non presente nell'elenco):</label>";
-    html += "<input type=\"text\" id=\"city_manual\" name=\"city_manual\" value=\"" + String(savedCity) + "\">";
+//    html += "<input type=\"text\" id=\"city_manual\" name=\"city_manual\" value=\"" + String(savedCity) + "\">";
+    html += "<input type=\"text\" id=\"city_manual\" name=\"city_manual\" value=\"""\">";
 
+// Selezione giorno previsione
+    html += "<label for=\"forecastDay\">Previsione da mostrare:</label>";
+    html += "<select id=\"forecastDay\" name=\"forecastDay\">";
+    String giorni[] = {"Oggi", "Domani", "Dopodomani"};
+    for (int i = 0; i < 3; i++) {
+      html += "<option value=\"" + String(i) + "\"" + (forecastDay == i ? " selected" : "") + ">" + giorni[i] + "</option>";
+    }
+    html += "</select>";
 
     html += "<button type=\"submit\">Salva Impostazioni</button>";
     html += "</form>";
@@ -1368,6 +1401,12 @@ void handleSave() {
         savedCity[sizeof(savedCity) - 1] = '\0';
         Serial.println(savedCity);
     } else {
+    }
+
+    // Gestione Giorno Previsione
+    if (server.hasArg("forecastDay")) {
+        forecastDay = server.arg("forecastDay").toInt();
+        if (forecastDay < 0 || forecastDay > 2) forecastDay = 0; // fallback
     }
 
     saveConfig(); 
