@@ -64,3 +64,9 @@ The link provided is exactly the one I used. Since only the glass part is needed
 
 🎛️ https://s.click.aliexpress.com/e/_oCWLLnF
 
+
+Aggiornamenti / Updates
+V1.1 - 09/2025 - L'inserimento della città manualemnte via WEB non funzionava / Manually entering the city via the WEB did not work
+V1.2 - 09/2025 - Aggiunta la possibilità di vedere la previsione del giorno corrente / del giorno dopo e del giorno dopo ancora, mediante menù di configurazione WEB / Added the ability to view the forecast for the current day, the following day, and the day after that via the WEB configuration menu
+V1.3 - 10/2025 - Non erano gestite diverse tipologie di meteo tipo Neve da 600 a 699 e nebbia fumo e altre condizioni particolari da 700 a 799 / Different types of weather conditions such as snow from 600 to 699 and fog, smoke, and other special conditions from 700 to 799 were not managed.
+V1.4 - 10/2025 - Aggiunta scritta in mezzo alle due icone per evidenziare il giorno relativo alle previsioni / Text added between the two icons to highlight the day relating to the forecast. 
