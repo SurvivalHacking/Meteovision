@@ -65,7 +65,10 @@ The link provided is exactly the one I used. Since only the glass part is needed
 🎛️ https://s.click.aliexpress.com/e/_oCWLLnF
 
 
+
+
 Aggiornamenti / Updates
+
 V1.1 - 09/2025 - L'inserimento della città manualemnte via WEB non funzionava / Manually entering the city via the WEB did not work
 
 V1.2 - 09/2025 - Aggiunta la possibilità di vedere la previsione del giorno corrente / del giorno dopo e del giorno dopo ancora, mediante menù di configurazione WEB / Added the ability to view the forecast for the current day, the following day, and the day after that via the WEB configuration menu
