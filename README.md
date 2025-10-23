@@ -77,4 +77,6 @@ V1.3 - 10/2025 - Non erano gestite diverse tipologie di meteo tipo Neve da 600 a
 
 V1.4 - 10/2025 - Aggiunta scritta in mezzo alle due icone per evidenziare il giorno relativo alle previsioni / Text added between the two icons to highlight the day relating to the forecast. 
 
+V1.5 - 10/2025 - (By Marco Camerani) Aggiunta Modalità Notturna con orario impostabile da interfaccia web, Indicazione intensità e direzione vento, fix meteo led che non si aggiornano se in modalità diversa auto / Added Night Mode with time settings via web interface, wind speed and direction indicator, LED weather fixes that do not update if in a mode other than auto.
+
 Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
