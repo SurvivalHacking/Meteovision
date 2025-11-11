@@ -1,6 +1,7 @@
 # Meteovision
 A 3D weather station / Una stazione meteo 3D
 
+## 📘 Descrizione / Description
 Meteovision è una stazione meteo fuori dal comune.
 Racchiusa in una campana di vetro, trasforma le previsioni del tempo in simboli luminosi: nuvole, fulmini, sole e luna si accendono con eleganza per mostrarti ciò che accadrà nel cielo.
 Un anello di luce RGB, controllabile anche tramite APP, accentua l’atmosfera dell’ambiente, mentre un display grafico aggiunge movimento e dettaglio.
@@ -27,56 +28,55 @@ With Meteovision, you don't read the weather: you watch it, you experience it.
 
 ![IMG_0625_(00-00-06-19)](https://github.com/user-attachments/assets/d3cc39a5-8f46-47bf-829d-019770c0a9b4)
 
+---
+## 🎛️ Schematic 
+
 ![Screenshot 2025-09-08 alle 11 39 13](https://github.com/user-attachments/assets/2f17305d-fa38-469d-8bbf-8e048fb46c6c)
 
+---
+## 🎛️ Bill of material / Elenco materiali
 
-Bill of material / Elenco materiali
-
-🎛️ SSD1306 128x32 AMZ: https://amzn.to/3GfbspG
-
-🎛️ SSD1306 128x32 ALI: https://s.click.aliexpress.com/e/_oovQgEA
-
-🎛️ Anello/Ring 24LED (EXT:85mm/INT:70mm) AMZ: https://amzn.to/44hIzRx
-
-🎛️ Vetro per/Glass for Redmi Watch 5 Active AMZ: https://amzn.to/3HZrPqO
-
-🎛️ Vetro per/Glass for Redmi Watch 5 Active ALI: https://s.click.aliexpress.com/e/_oD0nSBC
-
-🎛️ ESP32C3 AMZ: https://amzn.to/4kt5G2W
-
-🎛️ ESP32C3 ALI: https://s.click.aliexpress.com/e/_DDST7Bj
-
-🎛️ Pulsante/Pushbutton 6x6x7 DIP: https://s.click.aliexpress.com/e/_opuTCbP
-
-🎛️ Resistenza/resistor 220R ALI: https://s.click.aliexpress.com/e/_okkfxGp
-
-🎛️ Campana di vetro/Glass dome 9x12cm: https://s.click.aliexpress.com/e/_op1zvwS
+* SSD1306 128x32 AMZ: https://amzn.to/3GfbspG
+* SSD1306 128x32 ALI: https://s.click.aliexpress.com/e/_oovQgEA
+* Anello/Ring 24LED (EXT:85mm/INT:70mm) AMZ: https://amzn.to/44hIzRx
+* Vetro per/Glass for Redmi Watch 5 Active AMZ: https://amzn.to/3HZrPqO
+* Vetro per/Glass for Redmi Watch 5 Active ALI: https://s.click.aliexpress.com/e/_oD0nSBC
+* ESP32C3 AMZ: https://amzn.to/4kt5G2W
+* ESP32C3 ALI: https://s.click.aliexpress.com/e/_DDST7Bj
+* Pulsante/Pushbutton 6x6x7 DIP: https://s.click.aliexpress.com/e/_opuTCbP
+* Resistenza/resistor 220R ALI: https://s.click.aliexpress.com/e/_okkfxGp
+* Campana di vetro/Glass dome 9x12cm: https://s.click.aliexpress.com/e/_op1zvwS
 
 Il link proposto è esattamente quella che ho utilizzato, siccome serve solo la parte in vetro è ragionevole pensare che altri tipi proposti da altri venditori siano utilizzabili.
 Ho identificato altri 4 venditori che propongono la misura 9x12cm, ma non li ho provati effettivamente e non posso garantire che siano adatti, me se le misure sono rispettate dovrebbe andare benone. In generale se trovate una 'campana di vetro' o 'Glass dome' da 9x12cm dovrebbe andare bene. 
 Link alternativi:
 
 The link provided is exactly the one I used. Since only the glass part is needed, it is reasonable to assume that other types offered by other sellers are also suitable. I have identified four other sellers offering the 9x12cm size, but I have not actually tried them and cannot guarantee that they are suitable. However, if the measurements are correct, they should be fine. In general, if you find a 9x12cm ‘glass dome’ or ‘glass bell jar’, it should be fine. Alternative links:
+* https://s.click.aliexpress.com/e/_oEAQ9RF
+* https://s.click.aliexpress.com/e/_o2bXqxB
+* https://s.click.aliexpress.com/e/_oCWLLnF
+* Link affiliati / Affiliate links
 
-🎛️ https://s.click.aliexpress.com/e/_oEAQ9RF
+---
+## 👨‍💻 Programmazione modulo
+Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installaEsp32.html?progetto=MeteoVision
 
-🎛️ https://s.click.aliexpress.com/e/_o2bXqxB
+---
+# 📝 Revisioni / Revisions
+* V1.1 - 09/2025 - L'inserimento della città manualemnte via WEB non funzionava / Manually entering the city via the WEB did not work
+* V1.2 - 09/2025 - Aggiunta la possibilità di vedere la previsione del giorno corrente / del giorno dopo e del giorno dopo ancora, mediante menù di configurazione WEB / Added the ability to view the forecast for the current day, the following day, and the day after that via the WEB configuration menu
+* V1.3 - 10/2025 - Non erano gestite diverse tipologie di meteo tipo Neve da 600 a 699 e nebbia fumo e altre condizioni particolari da 700 a 799 / Different types of weather conditions such as snow from 600 to 699 and fog, smoke, and other special conditions from 700 to 799 were not managed.
+* V1.4 - 10/2025 - Aggiunta scritta in mezzo alle due icone per evidenziare il giorno relativo alle previsioni / Text added between the two icons to highlight the day relating to the forecast. 
+* V1.5 - 10/2025 - (By Marco Camerani) Aggiunta Modalità Notturna con orario impostabile da interfaccia web, Indicazione intensità e direzione vento, fix meteo led che non si aggiornano se in modalità diversa auto / Added Night Mode with time settings via web interface, wind speed and direction indicator, LED weather fixes that do not update if in a mode other than auto.
+* Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
 
-🎛️ https://s.click.aliexpress.com/e/_oCWLLnF
+---
+## 🧾 Licenza / License
 
+Questo progetto è distribuito con licenza
+**Creative Commons – Attribuzione – Non Commerciale 4.0 Internazionale (CC BY-NC 4.0)**.
 
+Puoi condividerlo e modificarlo liberamente, **citando l’autore**
+(Davide Gatti / [survivalhacking](https://github.com/survivalhacking)) e **senza scopi commerciali**.
 
-
-Aggiornamenti / Updates
-
-V1.1 - 09/2025 - L'inserimento della città manualemnte via WEB non funzionava / Manually entering the city via the WEB did not work
-
-V1.2 - 09/2025 - Aggiunta la possibilità di vedere la previsione del giorno corrente / del giorno dopo e del giorno dopo ancora, mediante menù di configurazione WEB / Added the ability to view the forecast for the current day, the following day, and the day after that via the WEB configuration menu
-
-V1.3 - 10/2025 - Non erano gestite diverse tipologie di meteo tipo Neve da 600 a 699 e nebbia fumo e altre condizioni particolari da 700 a 799 / Different types of weather conditions such as snow from 600 to 699 and fog, smoke, and other special conditions from 700 to 799 were not managed.
-
-V1.4 - 10/2025 - Aggiunta scritta in mezzo alle due icone per evidenziare il giorno relativo alle previsioni / Text added between the two icons to highlight the day relating to the forecast. 
-
-V1.5 - 10/2025 - (By Marco Camerani) Aggiunta Modalità Notturna con orario impostabile da interfaccia web, Indicazione intensità e direzione vento, fix meteo led che non si aggiornano se in modalità diversa auto / Added Night Mode with time settings via web interface, wind speed and direction indicator, LED weather fixes that do not update if in a mode other than auto.
-
-Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
+🔗 [https://creativecommons.org/licenses/by-nc/4.0/](https://creativecommons.org/licenses/by-nc/4.0/)
