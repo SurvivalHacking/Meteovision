@@ -28,7 +28,10 @@ With Meteovision, you don't read the weather: you watch it, you experience it.
 
 ![IMG_0625_(00-00-06-19)](https://github.com/user-attachments/assets/d3cc39a5-8f46-47bf-829d-019770c0a9b4)
 
+![Screenshot 2025-11-23 alle 22 28 35](https://github.com/user-attachments/assets/ba671773-fc72-47c1-9e3d-b3d0aebbafb0)
+
 ---
+
 ## 🎛️ Schematic 
 
 ![Screenshot 2025-09-08 alle 11 39 13](https://github.com/user-attachments/assets/2f17305d-fa38-469d-8bbf-8e048fb46c6c)
@@ -68,6 +71,9 @@ Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installa
 * V1.3 - 10/2025 - Non erano gestite diverse tipologie di meteo tipo Neve da 600 a 699 e nebbia fumo e altre condizioni particolari da 700 a 799 / Different types of weather conditions such as snow from 600 to 699 and fog, smoke, and other special conditions from 700 to 799 were not managed.
 * V1.4 - 10/2025 - Aggiunta scritta in mezzo alle due icone per evidenziare il giorno relativo alle previsioni / Text added between the two icons to highlight the day relating to the forecast. 
 * V1.5 - 10/2025 - (By Marco Camerani) Aggiunta Modalità Notturna con orario impostabile da interfaccia web, Indicazione intensità e direzione vento, fix meteo led che non si aggiornano se in modalità diversa auto / Added Night Mode with time settings via web interface, wind speed and direction indicator, LED weather fixes that do not update if in a mode other than auto.
+* V1.6 - 10/2025 - Bugfix salvataggio API key rivisto salvataggio di tutte le variabili più robusto gestione città con spazi e nomi lunghi a display
+* V1.7 - 11/2025 - aggiunta la possibilita di previsioni 5 giorni e nuova interfaccia web by Marco Prunca
+
 * Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
 
 ---
