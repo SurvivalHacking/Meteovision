@@ -58,7 +58,7 @@ The link provided is exactly the one I used. Since only the glass part is needed
 
 ---
 ## 👨‍💻 Programmazione modulo
-Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installaEsp32.html?progetto=MeteoVision
+Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installaEsp32.php?progetto=MeteoVision
 
 ---
 # 📝 Revisioni / Revisions
