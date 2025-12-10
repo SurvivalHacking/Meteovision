@@ -70,6 +70,7 @@ Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installa
 * V1.6 - 10/2025 - Bugfix salvataggio API key rivisto salvataggio di tutte le variabili più robusto gestione città con spazi e nomi lunghi a display
 * V1.7 - 11/2025 - aggiunta la possibilita di previsioni 5 giorni e nuova interfaccia web by Marco Prunca
 * V1.8 - 12/2025 - Sistemato problema sull'aggiornamento onghi 10 minuti su tutte le modalità
+* V1.81 - 12/2025 - Aggiunto swithc per disabilitare l'effetto direzione e velocità del vento sull'anello.
 
 * Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
 
