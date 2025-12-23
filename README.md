@@ -71,6 +71,10 @@ Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installa
 * V1.7 - 11/2025 - aggiunta la possibilita di previsioni 5 giorni e nuova interfaccia web by Marco Prunca
 * V1.8 - 12/2025 - Sistemato problema sull'aggiornamento onghi 10 minuti su tutte le modalità
 * V1.81 - 12/2025 - Aggiunto swithc per disabilitare l'effetto direzione e velocità del vento sull'anello.
+* V1.9 - 12/2025 - Aggiunta animazione anello NeoPixel al cambio modalità e toggle di abilitazione nell'interfaccia web
+* V1.91 - 12/2025 - Sistemato bug che facema smettere lèeffetto respiro dell'anello
+* V1.92 - 12/2025 - Aggiunta la possibilità di configurare la connessione WIFI in modo manuale. Tutte le istruzioni per la configurazioni sono nel file wifi_config.h by Gigi Soft
+
 
 * Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
 
