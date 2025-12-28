@@ -74,6 +74,7 @@ Programmatore WEB (Solo per chrome): https://davidegatti.altervista.org/installa
 * V1.9 - 12/2025 - Aggiunta animazione anello NeoPixel al cambio modalità e toggle di abilitazione nell'interfaccia web
 * V1.91 - 12/2025 - Sistemato bug che facema smettere lèeffetto respiro dell'anello
 * V1.92 - 12/2025 - Aggiunta la possibilità di configurare la connessione WIFI in modo manuale. Tutte le istruzioni per la configurazioni sono nel file wifi_config.h by Gigi Soft
+* V1.93 - 12/2025 - Sistemato l'effetto respiro quando attivato l'indicatore del vento, e sistemazione per la connessione WIFI by Marco Prunca e Gigi Soft
 
 
 * Nella cartella stampe 3D bambulab c'è un nuovo set di icone migliorate. / There is a new set of improved icons in the bambulab 3D prints folder.
