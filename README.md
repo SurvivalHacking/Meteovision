@@ -24,7 +24,7 @@ With Meteovision, you don't read the weather: you watch it, you experience it.
 
 ![4-IMG_0593_(00-00-02-10)](https://github.com/user-attachments/assets/8f880b22-6737-461a-8942-5eb78223a719)
 
-![Screenshot 2025-11-23 alle 22 28 35](https://github.com/user-attachments/assets/ba671773-fc72-47c1-9e3d-b3d0aebbafb0)
+![193-screen](https://github.com/user-attachments/assets/0f492ad8-3181-4a69-94d1-bc1116fd7e4e)
 
 ---
 
